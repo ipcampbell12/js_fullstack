@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { Posts } = require("../models");
+const { Posts, Comments } = require("../models");
 
-
+//get all posts
 router.get('/', async (req, res) => {
-    const listOfPosts = await Posts.findAll();
+    const listOfPosts = await Posts.findAll({
+        include: {
+            model: Comments,
+            as: "Comments",
+            attributes: ["id", "commentBody"]
+        }
+    });
     res.send(listOfPosts);
 
 });
@@ -19,13 +25,29 @@ router.post('/', async (req, res) => {
     res.json(post);
 });
 
-router.get('/:postId', async (req, res) => {
-    const post = await Posts.findByPk(req.params.id);
+//get post by id
+router.get('/:id', async (req, res) => {
+    const post = await Posts.findAll({
+        where: { id: req.params.id },
+        include: {
+            model: Comments,
+            as: "Comments",
+            attributes: ["id", "commentBody"]
+        }
+    });
 
     res.status(200).json(post);
+});
+
+router.delete('/:id', async (req, res) => {
+    const post = await Posts.findByPk(req.params.id);
+
+    await post.destroy();
+
+    res.status(200).json({ message: `Post with id of ${req.params.id} was deleted` });
 })
 
-router.put('/:postId', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const title = req.body.title;
         const postText = req.body.postText;

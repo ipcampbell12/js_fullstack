@@ -4,6 +4,12 @@ async function getAllPosts(func) {
     func(posts)
 }
 
+async function getAllComments(func) {
+    const response = await fetch("http://localhost:3001/comments");
+    const comments = await response.json();
+    func(comments)
+}
+
 
 async function fetchCreatePost(data) {
     console.log(data);
@@ -17,4 +23,5 @@ async function fetchCreatePost(data) {
 
 }
 
-export { getAllPosts, fetchCreatePost };
+
+export { getAllPosts, fetchCreatePost, getAllComments };

@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { Users } = require("../models");
+const { Users, Posts } = require("../models");
 
 //get one
 //make sure that string after paren in route is same as prop in where clause
 router.get('/:id', async (req, res) => {
     try {
         const user = await Users.findAll({
-            where: { id: req.params.id }
+            where: { id: req.params.id },
+            include: {
+                model: Posts,
+                as: "Posts"
+            }
         })
 
         res.send(user);
@@ -19,7 +23,12 @@ router.get('/:id', async (req, res) => {
 //get all
 router.get('/', async (req, res) => {
     try {
-        const allUsers = await Users.findAll();
+        const allUsers = await Users.findAll({
+            include: {
+                model: Posts,
+                as: "Posts"
+            }
+        });
         res.send(allUsers);
     } catch (err) {
         console.log(err);

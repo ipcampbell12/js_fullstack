@@ -6,10 +6,18 @@ const { Comments } = require("../models");
 router.get('/:postId', async (req, res) => {
     const postId = req.params.postId;
     const comments = await Comments.findAll({
-        where: { postId: postId }
+        where: { PostId: postId }
     });
 
-    res.json(comments);
+    return res.json(comments);
+
+});
+
+router.get('/', async (req, res) => {
+
+    const comments = await Comments.findAll();
+
+    return res.json(comments);
 
 });
 
@@ -20,7 +28,7 @@ router.post('/', async (req, res) => {
     await Comments.create(comment);
 
     //return same data that was sent
-    res.json(comment);
+    return res.json(comment);
 });
 
 module.exports = router;
