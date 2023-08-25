@@ -13,7 +13,7 @@ function Nav() {
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 <Route path="/createpost" exact element={<CreatePost />} />
-                <Route path="/post" exact element={<Post />} />
+                <Route path="/post/:id" exact element={<Post />} />
             </Routes>
 
         </nav>

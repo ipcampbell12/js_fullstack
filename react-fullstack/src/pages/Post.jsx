@@ -7,16 +7,22 @@ import classes from './Post.module.css';
 
 function Post(props) {
     let { id } = useParams();
-    let [post, setPost] = useState([]);
+    let [postObject, setPostObject] = useState({});
 
     useEffect(() => {
-        getPostById(setPost, id);
+        getPostById(setPostObject, id);
     });
 
-    console.log(post)
+    //console.log(postObject.title)
     return (
-        <div>
-            {id}
+        <div className="postPage">
+            <div className="leftSide">
+                <div className="title">{postObject.title}</div>
+                <div className="postText">{postObject.postText}</div>
+                <div className="footer">{postObject.username}</div>
+            </div>
+            <div className="rightSide"></div>
+
         </div>
     );
 }

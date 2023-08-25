@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
         }
     });
 
-    res.status(200).json(post);
+    return res.status(200).json(post);
 });
 
 router.delete('/:id', async (req, res) => {

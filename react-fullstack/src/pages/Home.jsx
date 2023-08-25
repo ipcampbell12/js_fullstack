@@ -14,6 +14,8 @@ function Home() {
         getAllPosts(setListOfPosts);
     }, []);
 
+
+
     return (
         <div>
             {listOfPosts.map((value, key) => {
@@ -22,7 +24,7 @@ function Home() {
                         key={key}
                         className="post"
                         onClick={() => {
-                            navigate(`/post/${value.id}`);
+                            navigate(`/posts/${value.id}`);
                         }}
                     >
                         <div className="title"> {value.title} </div>

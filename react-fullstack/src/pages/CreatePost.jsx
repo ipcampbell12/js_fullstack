@@ -1,16 +1,15 @@
-//import HandleModal from "../UI/HandleModal";
-// import Modal from "../UI/Modal";
-//import { Fragment } from "react";
 import classes from './CreatePost.module.css';
 import * as Yup from 'yup';
 // import axios from "axios";
 import { fetchCreatePost } from '../NetworkCalls';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function CreatePost() {
-
+    let navigate = useNavigate()
 
 
     const initialValues = {
@@ -28,8 +27,12 @@ function CreatePost() {
 
 
     const onSubmit = (data) => {
-        fetchCreatePost(data)
+        fetchCreatePost(data);
+        //redirect to home page
+        navigate('/');
     };
+
+
 
     return (
         <div className={classes["createPostPage"]}>
