@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import CreatePost from './CreatePost';
+import Post from './Post';
 
 function Nav() {
 
@@ -12,6 +13,7 @@ function Nav() {
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 <Route path="/createpost" exact element={<CreatePost />} />
+                <Route path="/post" exact element={<Post />} />
             </Routes>
 
         </nav>

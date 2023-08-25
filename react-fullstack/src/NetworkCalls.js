@@ -3,6 +3,11 @@ async function getAllPosts(func) {
     const posts = await response.json();
     func(posts)
 }
+async function getPostById(func, id) {
+    const response = await fetch(`http://localhost:3001/posts/${id}`);
+    const post = await response.json();
+    func(post)
+}
 
 async function getAllComments(func) {
     const response = await fetch("http://localhost:3001/comments");
@@ -24,4 +29,4 @@ async function fetchCreatePost(data) {
 }
 
 
-export { getAllPosts, fetchCreatePost, getAllComments };
+export { getAllPosts, fetchCreatePost, getAllComments, getPostById };
