@@ -24,7 +24,7 @@ function Home() {
                         key={key}
                         className="post"
                         onClick={() => {
-                            navigate(`/posts/${value.id}`);
+                            navigate(`/post/${value.id}`);
                         }}
                     >
                         <div className="title"> {value.title} </div>
