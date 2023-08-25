@@ -16,17 +16,21 @@ function Post(props) {
     console.log(postObject);
     return (
 
-        <div className="postPage" >
-            {postObject.length > 0 ? (
-                <div className="leftSide">
-                    <div className="title">{postObject[0]['title']}</div>
-                    <div className="postText">{postObject[0]['postText']}</div>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )
-            }
-            <div className="rightSide"></div>
+        <div className={classes["post-page"]} >
+
+            <div className={classes["left-side"]}>
+                {postObject.length > 0 ? (
+                    <div className={classes["post"]}>
+                        <div className={classes["title"]}>{postObject[0]['title']}</div>
+                        <div className={classes["post-text"]}>{postObject[0]['postText']}</div>
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )
+                }
+            </div>
+
+            <div className={classes["right-side"]}>Comment Section</div>
 
         </div>
 
