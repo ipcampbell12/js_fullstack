@@ -1,6 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const { Users, Posts } = require("../models");
+const bcrypt = require('bcrypt');
+
+
+//hashing is a one way function: can never know original passowrd from original value
+//can only compare hashed value and see if they were the same strings
+
+
+//create new user
+router.post('/', async (req, res) => {
+
+    //need to get password individually in order to hash it
+    const { username, password } = req.body;
+
+    try {
+        const hash = await bcrypt.hash(password, 10);
+        const newUser = await Users.create({
+            username: username,
+            password: hash
+        });
+
+        return res.send(newUser);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+});
 
 //get one
 //make sure that string after paren in route is same as prop in where clause
@@ -36,18 +63,7 @@ router.get('/', async (req, res) => {
 
 });
 
-//create new user
-router.post('/', async (req, res) => {
-    const user = req.body;
 
-    try {
-        await Users.create(user);
-        res.send(user)
-    } catch (err) {
-        console.log(err);
-    }
-
-});
 
 
 router.delete('/:id', async (req, res) => {

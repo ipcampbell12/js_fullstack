@@ -19,7 +19,7 @@ const postRouter = require("./routes/Posts");
 app.use("/posts", postRouter);
 
 const userRouter = require("./routes/Users");
-app.use("/users", userRouter);
+app.use("/auth", userRouter);
 
 const commentRouter = require("./routes/Comments");
 app.use("/comments", commentRouter);
