@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 //can only compare hashed value and see if they were the same strings
 
 
-//create new user
+//register new user
 router.post('/', async (req, res) => {
 
     //need to get password individually in order to hash it
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     try {
         const hash = await bcrypt.hash(password, 10);
         const newUser = await Users.create({
-            username: username,
+            userName: username,
             password: hash
         });
 
@@ -28,6 +28,34 @@ router.post('/', async (req, res) => {
     }
 
 });
+
+//login route
+router.post('/login', async (req, res) => {
+
+    const { username, password } = req.body;
+
+    try {
+        //find user with corresponding stored username
+        const user = await Users.findOne({
+            where: {
+                userName: username
+            }
+        });
+
+        //check to make sure user exists
+        if (!user) res.json({ error: "User doesn't exist" });
+
+        const match = await bcrypt.compare(password, user.password);
+
+        if (!match) res.json({ error: "Wrong username and password combination" });
+
+        return res.json("YOU ARE LOGGED IN FOOL!");
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+})
+
 
 //get one
 //make sure that string after paren in route is same as prop in where clause
