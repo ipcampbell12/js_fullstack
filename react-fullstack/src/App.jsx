@@ -22,7 +22,17 @@ const items = [
     label: 'Create post',
     key: '/createpost',
     icon: <DownCircleOutlined />
-  }
+  },
+  {
+    label: 'Login',
+    key: '/login',
+    icon: <DownCircleOutlined />
+  },
+  {
+    label: 'Registration',
+    key: '/registration',
+    icon: <DownCircleOutlined />
+  },
 ];
 
 function App() {
