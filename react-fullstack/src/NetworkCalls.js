@@ -39,5 +39,17 @@ async function fetchCreateComment(data) {
 
 }
 
+async function registerUser(data) {
+    //console.log(data);
+    return fetch("http://localhost:3001/auth", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(resp => resp.json()).then(resp => console.log(resp));
 
-export { getAllPosts, fetchCreatePost, getAllComments, getPostById, fetchCreateComment };
+}
+
+
+export { getAllPosts, fetchCreatePost, getAllComments, getPostById, fetchCreateComment, registerUser };
