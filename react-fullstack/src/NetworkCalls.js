@@ -51,5 +51,17 @@ async function registerUser(data) {
 
 }
 
+async function loginUser(data) {
+    //console.log(data);
+    return fetch("http://localhost:3001/auth/login", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(resp => resp.json()).then(resp => console.log(resp));
 
-export { getAllPosts, fetchCreatePost, getAllComments, getPostById, fetchCreateComment, registerUser };
+}
+
+
+export { getAllPosts, fetchCreatePost, getAllComments, getPostById, fetchCreateComment, registerUser, loginUser };
